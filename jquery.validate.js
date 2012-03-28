@@ -61,7 +61,7 @@ $.extend($.fn, {
 				}
 				function handle() {
 					var hidden;
-					if ( validator.settings.submitHandler ) {
+					if ( validator.settings.submitHandler && !validator.cancelSubmit ) {
 						if (validator.submitButton) {
 							// insert a hidden input as a replacement for the missing submit button
 							hidden = $("<input type='hidden'/>").attr("name", validator.submitButton.name).val(validator.submitButton.value).appendTo(validator.currentForm);
@@ -73,12 +73,14 @@ $.extend($.fn, {
 						}
 						return false;
 					}
+
+					validator.cancelSubmit = false;
 					return true;
 				}
 
 				// prevent submit for invalid forms or custom submit handlers
 				if ( validator.cancelSubmit ) {
-					validator.cancelSubmit = false;
+					//validator.cancelSubmit = false;
 					return handle();
 				}
 				if ( validator.form() ) {

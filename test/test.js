@@ -261,6 +261,27 @@ test("submitHandler keeps submitting button", function() {
 	$("#userForm").submit();
 });
 
+test("submitHandler with cancel", function() {
+	$("#userForm2").validate({
+		debug: true,
+		submitHandler: function(form) {
+			ok( false, "Should not be called" );
+			// dunno how to test this better; this tests the implementation that uses a hidden input
+			var hidden = $(form).find("input:hidden")[0];
+			deepEqual(hidden.value, button.value)
+			deepEqual(hidden.name, button.name)
+		}
+	});
+	$("#userForm2").submit(function() {
+			ok( true, "Real submit called" );
+			return false;
+	});
+	$("#username2").val("bla");
+	var button = $("#userForm2 :submit")[0]
+	$(button).triggerHandler("click");
+	$("#userForm2").submit();
+});
+
 test("showErrors()", function() {
 	expect( 4 );
 	var errorLabel = $('#errorFirstname').hide();
