@@ -70,6 +70,17 @@ test("valid() plugin method, special handling for checkable groups", function() 
 	ok( checkable.valid(), "valid, third box is checked" );
 });
 
+test("valid() plugin method returns boolean", function() {
+	expect(2);
+	var errorList = [{name:"meal12",message:"foo", element:$("#meal12")[0]}];
+	var form = $('#testForm12');
+	var control = form.find('input[type="text"]');
+	control.validate();
+	ok( !control.valid(), "Errors, must be invalid" );
+	equal( typeof control.valid(), "boolean", "valid returns boolean" );
+});
+
+
 test("addMethod", function() {
 	expect( 3 );
 	$.validator.addMethod("hi", function(value) {
