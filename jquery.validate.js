@@ -844,9 +844,8 @@ $.extend($.validator, {
 				// and non-HTML5 browsers might have required="" markup
 				if (value === "") {
 					value = true;
-				} else if (value === "false") {
-					value = false;
 				}
+
 				value = !!value; //force non-HTML5 browsers to return bool
 			} else {
 				value = $element.attr(method);
