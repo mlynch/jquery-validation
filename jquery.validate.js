@@ -510,6 +510,9 @@ $.extend($.validator, {
 		},
 
 		elementValue: function( element ) {
+			if( $(element).attr('type') === 'radio') {
+				return $('input:radio[name="' + $(element).attr('name') + '"]').val();
+			}
 			var val = $(element).val();
 			if( typeof val === 'string' ) {
 				return val.replace(/\r/g, "");
