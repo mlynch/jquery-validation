@@ -510,8 +510,9 @@ $.extend($.validator, {
 		},
 
 		elementValue: function( element ) {
-			if( $(element).attr('type') === 'radio') {
-				return $('input:radio[name="' + $(element).attr('name') + '"]:checked').val();
+			var type = $(element).attr('type');
+			if( type === 'radio' || type === 'checkbox' ) {
+				return $('input[name="' + $(element).attr('name') + '"]:checked').val();
 			}
 			var val = $(element).val();
 			if( typeof val === 'string' ) {
